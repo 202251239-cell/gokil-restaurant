@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GOKIL Restaurant — Family Style Fine Dining</title>
+    <meta
+      name="description"
+      content="GOKIL Restaurant di Kudus menghadirkan pengalaman family style fine dining dengan cita rasa Indonesia, Western, dan Chinese. Reservasi via WhatsApp."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #1c1917;
+        --bg-deep: #120f0d;
+        --paper: #f5f0e8;
+        --paper-soft: #efe7dc;
+        --copper: #b87333;
+        --sage: #7a8a6e;
+        --ink: #0f0d0b;
+        --ink-soft: rgba(15, 13, 11, 0.7);
+        --line: rgba(245, 240, 232, 0.14);
+        --line-dark: rgba(28, 25, 23, 0.14);
+        --drift: rgba(184, 115, 51, 0.18);
+        --shadow: rgba(18, 15, 13, 0.18);
+        --maxw: 1320px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: 'Archivo', sans-serif;
+        background: var(--paper);
+        color: var(--ink);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      body.no-scroll {
+        overflow: hidden;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .container {
+        width: min(var(--maxw), calc(100% - 64px));
+        margin: 0 auto;
+      }
+
+      .grain::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          radial-gradient(rgba(255, 255, 255, 0.09) 0.5px, transparent 0.7px),
+          radial-gradient(rgba(0, 0, 0, 0.06) 0.5px, transparent 0.7px);
+        background-size: 8px 8px;
+        background-position: 0 0, 4px 4px;
+        mix-blend-mode: soft-light;
+        opacity: 0.45;
+      }
+
+      .section {
+        position: relative;
+        padding: 120px 0;
+      }
+
+      .eyebrow,
+      .meta-kicker,
+      .nav-link,
+      .cta,
+      .mb-button,
+      .micro,
+      .label,
+      .menu-tag,
+      .facility-item,
+      .space-tag,
+      .event-pill,
+      .mobile-menu a,
+      .brand-mark {
+        font-family: 'Space Grotesk', sans-serif;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+        background: rgba(12, 10, 9, 0.28);
+        border-bottom: 1px solid transparent;
+      }
+
+      .site-header.scrolled {
+        background: rgba(12, 10, 9, 0.82);
+        border-color: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+      }
+
+      .nav-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 88px;
+        gap: 20px;
+        transition: min-height 0.2s ease;
+      }
+
+      .site-header.scrolled .nav-wrap {
+        min-height: 72px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        z-index: 20;
+      }
+
+      .brand-mark {
+        font-size: 1.1rem;
+        line-height: 1;
+        letter-spacing: 0.22em;
+        color: var(--paper);
+        font-weight: 700;
+      }
+
+      .brand-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--copper);
+        display: inline-block;
+      }
+
+      .main-nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(20px, 2vw, 40px);
+        margin-left: auto;
+        margin-right: 20px;
+      }
+
+      .nav-link {
+        position: relative;
+        font-size: 0.72rem;
+        color: rgba(245, 240, 232, 0.78);
+        transition: color 0.2s ease;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 1px;
+        background: var(--copper);
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.25s ease;
+      }
+
+      .nav-link:hover,
+      .nav-link:focus-visible {
+        color: var(--paper);
+      }
+
+      .nav-link:hover::after,
+      .nav-link:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .button,
+      .button-ghost {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        max-width: fit-content;
+        padding: 0.92rem 1.45rem;
+        border: 1px solid var(--copper);
+        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .button {
+        background: var(--copper);
+        color: var(--paper);
+        border-color: var(--copper);
+      }
+
+      .button:hover,
+      .button:focus-visible,
+      .button-ghost:hover,
+      .button-ghost:focus-visible {
+        transform: scale(1.04);
+      }
+
+      .button-ghost {
+        background: transparent;
+        border-color: var(--paper);
+        color: var(--paper);
+      }
+
+      .menu-toggle {
+        display: none;
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(245, 240, 232, 0.2);
+        background: transparent;
+        position: relative;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .menu-toggle span,
+      .menu-toggle::before,
+      .menu-toggle::after {
+        content: "";
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        height: 1px;
+        background: var(--paper);
+        transition: transform 0.25s ease, opacity 0.25s ease;
+      }
+
+      .menu-toggle span { top: 21px; }
+      .menu-toggle::before { top: 15px; }
+      .menu-toggle::after { bottom: 15px; }
+
+      .menu-toggle.open::before {
+        transform: rotate(45deg) translateY(6px);
+      }
+
+      .menu-toggle.open::after {
+        transform: rotate(-45deg) translateY(-6px);
+      }
+
+      .menu-toggle.open span {
+        opacity: 0;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        inset: 0 0 0 auto;
+        width: min(78vw, 360px);
+        background: rgba(12, 10, 9, 0.96);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 120px 28px 32px;
+        transform: translateX(115%);
+        transition: transform 0.28s ease;
+        display: none;
+        z-index: 900;
+      }
+
+      .mobile-menu.open {
+        transform: translateX(0);
+      }
+
+      .mobile-menu a {
+        display: block;
+        color: var(--paper);
+        font-size: 0.76rem;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .mobile-menu .button {
+        margin-top: 24px;
+      }
+
+      .hero {
+        position: relative;
+        padding-top: 160px;
+        background: var(--bg);
+        color: var(--paper);
+        overflow: hidden;
+      }
+
+      .hero-inner {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr);
+        gap: 52px;
+        align-items: center;
+        min-height: calc(100vh - 120px);
+      }
+
+      .hero-copy {
+        max-width: 620px;
+      }
+
+      .meta-kicker {
+        display: inline-block;
+        color: var(--copper);
+        font-size: 0.7rem;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        margin: 0;
+        font-weight: 500;
+        font-family: 'Fraunces', serif;
+        font-size: clamp(3.5rem, 6vw, 7rem);
+        line-height: 0.96;
+        letter-spacing: -0.06em;
+      }
+
+      h1 em {
+        font-style: italic;
+      }
+
+      .hero-copy p {
+        max-width: 560px;
+        margin-top: 22px;
+        color: rgba(245, 240, 232, 0.74);
+        font-size: 1.06rem;
+      }
+
+      .hours {
+        margin-top: 28px;
+        padding-left: 18px;
+        border-left: 1px solid var(--copper);
+        color: rgba(245, 240, 232, 0.8);
+      }
+
+      .hours label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.7rem;
+        color: rgba(245, 240, 232, 0.63);
+      }
+
+      .hours strong {
+        font-weight: 600;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 30px;
+      }
+
+      .button-ghost.hero-ghost {
+        border-color: rgba(245, 240, 232, 0.28);
+        color: var(--paper);
+      }
+
+      .hero-media {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .photo-arch {
+        position: relative;
+        width: min(100%, 560px);
+        min-height: 620px;
+        border: 1px solid rgba(245, 240, 232, 0.18);
+        border-radius: 48% 48% 18% 18% / 18% 18% 14% 14%;
+        overflow: hidden;
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.18);
+      }
+
+      .photo-arch img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 26px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        opacity: 0.8;
+        color: rgba(245, 240, 232, 0.75);
+      }
+
+      .scroll-indicator::before {
+        content: "";
+        width: 44px;
+        height: 1px;
+        background: rgba(245, 240, 232, 0.5);
+      }
+
+      .scroll-indicator::after {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-right: 1px solid rgba(245, 240, 232, 0.7);
+        border-bottom: 1px solid rgba(245, 240, 232, 0.7);
+        transform: rotate(45deg) translateY(-1px);
+        display: inline-block;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 38px;
+      }
+
+      .section-number {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--copper);
+      }
+
+      .section-header h2 {
+        margin: 10px 0 0;
+        font-family: 'Fraunces', serif;
+        font-size: clamp(2.4rem, 4vw, 4rem);
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: -0.06em;
+      }
+
+      .section-header p {
+        max-width: 480px;
+        margin: 0;
+        color: var(--ink-soft);
+      }
+
+      .about {
+        background: var(--paper);
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        gap: 46px;
+        align-items: center;
+      }
+
+      .about-copy {
+        position: relative;
+      }
+
+      .about-copy p {
+        font-size: 1.06rem;
+        color: var(--ink-soft);
+        margin: 0 0 18px;
+      }
+
+      .pull-quote {
+        margin-top: 26px;
+        padding: 22px 0 0 24px;
+        border-left: 1px solid var(--copper);
+        color: var(--ink);
+        font-family: 'Fraunces', serif;
+        font-style: italic;
+        font-size: clamp(1.5rem, 2vw, 2.18rem);
+        line-height: 1.2;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 32px;
+      }
+
+      .feature {
+        padding: 18px 18px 18px 18px;
+        border-top: 1px solid var(--line-dark);
+        border-bottom: 1px solid var(--line-dark);
+        border-left: 1px solid var(--copper);
+        background: rgba(184, 115, 51, 0.02);
+      }
+
+      .feature strong {
+        display: block;
+        font-size: 0.82rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink);
+        margin-bottom: 6px;
+      }
+
+      .feature span {
+        color: var(--ink-soft);
+        font-size: 0.92rem;
+      }
+
+      .about-media {
+        position: relative;
+        min-height: 620px;
+      }
+
+      .about-photo {
+        width: 100%;
+        height: 100%;
+        min-height: 620px;
+        object-fit: cover;
+        border-radius: 24px 24px 36px 36px;
+        box-shadow: 0 24px 72px rgba(15, 13, 11, 0.12);
+      }
+
+      .stamp {
+        position: absolute;
+        right: -18px;
+        bottom: 24px;
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        border: 1px solid rgba(28, 25, 23, 0.45);
+        background: rgba(245, 240, 232, 0.86);
+        display: grid;
+        place-items: center;
+        transform: rotate(-12deg);
+        text-align: center;
+        color: var(--ink);
+        box-shadow: 0 18px 34px rgba(15, 13, 11, 0.1);
+      }
+
+      .stamp span {
+        display: block;
+        font-family: 'Space Grotesk', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 0.62rem;
+        line-height: 1.8;
+      }
+
+      .menu {
+        background: var(--bg);
+        color: var(--paper);
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .menu-card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(245, 240, 232, 0.12);
+        padding: 30px 26px 22px;
+        min-height: 260px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .menu-index {
+        font-family: 'Fraunces', serif;
+        font-size: 2.2rem;
+        line-height: 1;
+        color: rgba(184, 115, 51, 0.9);
+      }
+
+      .menu-card h3 {
+        margin: 18px 0 12px;
+        font-family: 'Fraunces', serif;
+        font-weight: 500;
+        font-size: clamp(1.7rem, 2vw, 2.3rem);
+        letter-spacing: -0.04em;
+      }
+
+      .menu-card p {
+        margin: 0;
+        color: rgba(245, 240, 232, 0.72);
+      }
+
+      .menu-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: auto;
+        padding-top: 22px;
+      }
+
+      .menu-tag {
+        display: inline-flex;
+        padding: 7px 9px;
+        border: 1px solid rgba(245, 240, 232, 0.2);
+        font-size: 0.56rem;
+        color: rgba(245, 240, 232, 0.9);
+      }
+
+      .menu-cta {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 30px;
+      }
+
+      .menu-cta .button-ghost {
+        border-color: rgba(245, 240, 232, 0.28);
+        color: var(--paper);
+      }
+
+      .events-marquee-wrap {
+        background: var(--copper);
+        color: var(--paper);
+        overflow: hidden;
+        border-top: 1px solid rgba(15, 13, 11, 0.1);
+        border-bottom: 1px solid rgba(15, 13, 11, 0.1);
+      }
+
+      .events-marquee {
+        display: flex;
+        white-space: nowrap;
+        width: max-content;
+        padding: 18px 0;
+        animation: marquee 24s linear infinite;
+      }
+
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      .event-pill {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        gap: 18px;
+        padding: 0 18px;
+      }
+
+      .event-pill::after {
+        content: "•";
+        font-size: 1.2rem;
+        opacity: 0.7;
+      }
+
+      .spaces {
+        background: var(--paper);
+      }
+
+      .spaces-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 0.9fr;
+        gap: 22px;
+      }
+
+      .space-card {
+        position: relative;
+        overflow: hidden;
+        min-height: 440px;
+        border: 1px solid rgba(15, 13, 11, 0.08);
+        background: #d0c4b0;
+      }
+
+      .space-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .space-card:hover img {
+        transform: scale(1.04);
+      }
+
+      .space-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(15,13,11,0.12), rgba(15,13,11,0.72));
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 26px 28px;
+      }
+
+      .space-tag {
+        font-size: 0.62rem;
+        letter-spacing: 0.18em;
+        color: rgba(245, 240, 232, 0.86);
+      }
+
+      .space-card h3 {
+        margin: 10px 0 0;
+        font-family: 'Fraunces', serif;
+        font-size: clamp(2rem, 3vw, 3rem);
+        line-height: 0.98;
+        letter-spacing: -0.06em;
+        color: var(--paper);
+      }
+
+      .right-stack {
+        display: grid;
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .small-card {
+        min-height: 220px;
+      }
+
+      .facility-strip {
+        background: var(--bg);
+        color: var(--paper);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .facility-row {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 12px;
+        align-items: center;
+        padding: 28px 0;
+      }
+
+      .facility-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 18px 12px;
+        border: 1px solid rgba(245, 240, 232, 0.08);
+        color: rgba(245, 240, 232, 0.86);
+        text-align: center;
+        font-size: 0.65rem;
+      }
+
+      .facility-item .icon {
+        font-size: 1.2rem;
+      }
+
+      .location {
+        background: var(--paper);
+      }
+
+      .location-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 24px;
+      }
+
+      .location-panel {
+        background: rgba(28, 25, 23, 0.02);
+        border: 1px solid rgba(28, 25, 23, 0.09);
+        padding: 28px;
+      }
+
+      .location-panel p {
+        margin: 0 0 18px;
+        color: var(--ink-soft);
+      }
+
+      .contact-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .contact-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        border-top: 1px solid var(--line-dark);
+        padding-top: 12px;
+      }
+
+      .contact-item strong {
+        font-family: 'Space Grotesk', sans-serif;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.66rem;
+        color: var(--ink-soft);
+      }
+
+      .contact-item a,
+      .contact-item span {
+        font-size: 1rem;
+        color: var(--ink);
+      }
+
+      .map-card {
+        position: relative;
+        min-height: 440px;
+        overflow: hidden;
+        border: 1px solid rgba(28, 25, 23, 0.08);
+        background: linear-gradient(120deg, rgba(184, 115, 51, 0.12), rgba(122, 138, 110, 0.1));
+      }
+
+      .map-card .map-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(28, 25, 23, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(28, 25, 23, 0.05) 1px, transparent 1px);
+        background-size: 22px 22px;
+      }
+
+      .map-pin {
+        position: absolute;
+        left: 50%;
+        top: 42%;
+        transform: translate(-50%, -50%);
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+        background: rgba(184, 115, 51, 0.15);
+        display: grid;
+        place-items: center;
+      }
+
+      .map-pin::before {
+        content: "";
+        display: block;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--copper);
+        box-shadow: 0 0 0 10px rgba(184, 115, 51, 0.18);
+      }
+
+      .map-card .note {
+        position: absolute;
+        left: 26px;
+        right: 26px;
+        bottom: 28px;
+        background: rgba(17, 16, 15, 0.9);
+        color: var(--paper);
+        border: 1px solid rgba(245, 240, 232, 0.1);
+        padding: 18px 20px;
+      }
+
+      .map-card .note .label {
+        display: block;
+        font-size: 0.62rem;
+        color: rgba(245, 240, 232, 0.7);
+        margin-bottom: 8px;
+      }
+
+      .map-card .note strong {
+        display: block;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      .site-footer {
+        background: var(--bg);
+        color: rgba(245, 240, 232, 0.7);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        min-height: 96px;
+      }
+
+      .footer-links {
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(245, 240, 232, 0.8);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 1100px) {
+        .hero-inner,
+        .about-grid,
+        .location-grid,
+        .spaces-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-inner {
+          min-height: auto;
+          padding-bottom: 70px;
+        }
+
+        .hero-copy {
+          max-width: 100%;
+        }
+
+        .menu-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .facility-row {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 860px) {
+        .container {
+          width: min(var(--maxw), calc(100% - 28px));
+        }
+
+        .main-nav,
+        .site-header .button {
+          display: none;
+        }
+
+        .menu-toggle {
+          display: inline-block;
+        }
+
+        .mobile-menu {
+          display: block;
+        }
+
+        .hero {
+          padding-top: 140px;
+        }
+
+        .photo-arch {
+          min-height: 480px;
+          border-radius: 12px;
+        }
+
+        .section {
+          padding: 90px 0;
+        }
+
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .right-stack {
+          grid-template-rows: auto;
+        }
+
+        .facility-row {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .footer-inner {
+          flex-direction: column;
+          justify-content: center;
+          text-align: center;
+          padding: 18px 0;
+        }
+      }
+
+      @media (max-width: 540px) {
+        .hero-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .button,
+        .button-ghost {
+          width: 100%;
+        }
+
+        .facility-row {
+          grid-template-columns: 1fr;
+        }
+
+        .about-photo,
+        .space-card,
+        .map-card {
+          min-height: 340px;
+        }
+
+        h1 {
+          font-size: clamp(2.7rem, 17vw, 5rem);
+        }
+
+        .section-header h2 {
+          font-size: 2.4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Demo badge -->
+    <div class="demo-badge" style="position:fixed;top:14px;right:14px;z-index:10000;background:var(--copper);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;padding:6px 14px;border-radius:2px;">Demo</div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="#top" class="brand" aria-label="GOKIL restaurant home">
+          <span class="brand-mark">GOKIL</span>
+          <span class="brand-dot"></span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#about" class="nav-link">Tentang</a>
+          <a href="#menu" class="nav-link">Menu</a>
+          <a href="#spaces" class="nav-link">Ruang</a>
+          <a href="#location" class="nav-link">Lokasi</a>
+        </nav>
+
+        <a
+          class="button"
+          href="https://wa.me/6282319482812?text=Halo%20GOKIL%20Restaurant%2C%20saya%20ingin%20melakukan%20reservasi"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Reservasi</a
+        >
+
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="mobile-menu" aria-label="Mobile navigation">
+        <a href="#about">Tentang</a>
+        <a href="#menu">Menu</a>
+        <a href="#spaces">Ruang</a>
+        <a href="#location">Lokasi</a>
+        <a
+          class="button"
+          href="https://wa.me/6282319482812?text=Halo%20GOKIL%20Restaurant%2C%20saya%20ingin%20melakukan%20reservasi"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Reservasi</a
+        >
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero grain">
+        <div class="container hero-inner">
+          <div class="hero-copy reveal">
+            <div class="meta-kicker">Family Style Fine Dining — Kudus</div>
+            <h1>Flavours. <em>Space.</em> Moment.</h1>
+            <p>
+              Bukan sekadar tempat makan. Ini adalah ruang di mana keluarga berkumpul,
+              cerita tercipta, dan setiap suapan punya makna. Nikmati hidangan dengan
+              sentuhan Indonesia, Western, dan Chinese dalam suasana hangat yang cocok
+              untuk momen bersama.
+            </p>
+
+            <div class="hours">
+              <label>Jam Operasional</label>
+              <strong>Senin–Jumat: 11.00–21.00 WIB</strong><br />
+              <strong>Sabtu–Minggu: 11.00–22.00 WIB</strong>
+            </div>
+
+            <div class="hero-actions">
+              <a
+                class="button"
+                href="https://wa.me/6282319482812?text=Halo%20GOKIL%20Restaurant%2C%20saya%20ingin%20melakukan%20reservasi"
+                target="_blank"
+                rel="noopener noreferrer"
+                >WhatsApp Reservasi</a
+              >
+              <a
+                class="button-ghost hero-ghost"
+                href="https://drive.google.com/file/d/1oxXq6dMygP-2r2Fvua1pAmSEuHWml7kJ/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Lihat Menu 2026</a
+              >
+            </div>
+          </div>
+
+          <div class="hero-media reveal">
+            <div class="photo-arch">
+              <img
+                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80&auto=format"
+                alt="Interior restoran GOKIL"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll-indicator" aria-label="Scroll down">Scroll</div>
+      </section>
+
+      <section class="section about" id="about">
+        <div class="container">
+          <div class="section-header reveal">
+            <div>
+              <div class="section-number">01</div>
+              <h2>Tentang GOKIL</h2>
+            </div>
+            <p>
+              Dikelola PT Muria Jaya Boga, GOKIL menghadirkan pengalaman makan keluarga
+              dengan nuansa hangat, cita rasa otentik, dan ruang yang dirancang untuk
+              kebersamaan.
+            </p>
+          </div>
+
+          <div class="about-grid">
+            <div class="about-copy reveal">
+              <p>
+                GOKIL Restaurant adalah family style fine dining yang menata setiap jamuan
+                seperti momen yang berharga. Dengan tiga masakan utama—Indonesia, Western,
+                dan Chinese—kami menghadirkan menu yang kaya, familiar, dan penuh rasa.
+              </p>
+              <p>
+                Cita rasa paling ikoniknya adalah <strong>Sego Kikil</strong>, hidangan
+                bestseller yang menjadi pilihan banyak tamu dan menjadi identitas outlet
+                itu sendiri.
+              </p>
+
+              <div class="pull-quote">Bukan sekadar tempat makan. Ini adalah ruang di mana keluarga berkumpul, cerita tercipta, dan setiap suapan punya makna.</div>
+
+              <div class="feature-grid">
+                <div class="feature">
+                  <strong>Tiga Masakan</strong>
+                  <span>Indonesia • Western • Chinese</span>
+                </div>
+                <div class="feature">
+                  <strong>Signature</strong>
+                  <span>Sego Kikil andalan</span>
+                </div>
+                <div class="feature">
+                  <strong>Acara</strong>
+                  <span>Wedding, birthday, gathering</span>
+                </div>
+                <div class="feature">
+                  <strong>Sejak 2021</strong>
+                  <span>Family style dining sejak awal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-media reveal">
+              <img
+                class="about-photo"
+                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&auto=format"
+                alt="Hidangan fine dining"
+              />
+              <div class="stamp"><span>Family<br />Style<br />Dining</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section menu" id="menu">
+        <div class="container">
+          <div class="section-header reveal">
+            <div>
+              <div class="section-number">02</div>
+              <h2>Menu Utama</h2>
+            </div>
+            <p>
+              Pilihan rasa yang lengkap untuk meja keluarga, jamuan santai, dan momen
+              spesial bersama orang-orang yang Anda sayangi.
+            </p>
+          </div>
+
+          <div class="menu-grid">
+            <article class="menu-card reveal">
+              <div class="menu-index">I</div>
+              <h3>Indonesia</h3>
+              <p>
+                Dari sajian hangat yang familiar hingga pilihan yang kaya rempah, menu
+                Indonesia di GOKIL hadir dengan rasa yang dekat di hati.
+              </p>
+              <div class="menu-tags">
+                <span class="menu-tag">Sego Kikil</span>
+                <span class="menu-tag">Ayam</span>
+                <span class="menu-tag">Seafood</span>
+              </div>
+            </article>
+
+            <article class="menu-card reveal">
+              <div class="menu-index">II</div>
+              <h3>Western</h3>
+              <p>
+                Sentuhan modern dengan cita rasa yang bersahabat untuk meja makan,
+                pertemuan keluarga, dan pengalaman makan yang lebih berkelas.
+              </p>
+              <div class="menu-tags">
+                <span class="menu-tag">Steak</span>
+                <span class="menu-tag">Pasta</span>
+                <span class="menu-tag">Fusion</span>
+              </div>
+            </article>
+
+            <article class="menu-card reveal">
+              <div class="menu-index">III</div>
+              <h3>Chinese</h3>
+              <p>
+                Kombinasi rasa gurih, hangat, dan berimbang yang terasa pas di setiap
+                saat—mulai dari acara santai sampai perayaan keluarga.
+              </p>
+              <div class="menu-tags">
+                <span class="menu-tag">Dim Sum</span>
+                <span class="menu-tag">Wok</span>
+                <span class="menu-tag">Lauk</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="menu-cta reveal">
+            <a
+              class="button-ghost"
+              href="https://drive.google.com/drive/folders/1Ka7wEd4Ij6V3NCIqbHXAXLbZJUCaLsaT?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Lihat Price List Venue &amp; Buffet</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <div class="events-marquee-wrap" aria-label="Event offerings marquee">
+        <div class="events-marquee">
+          <div class="event-pill">Wedding Reception</div>
+          <div class="event-pill">Birthday Party</div>
+          <div class="event-pill">Corporate Meeting</div>
+          <div class="event-pill">Family Gathering</div>
+          <div class="event-pill">After Wedding</div>
+          <div class="event-pill">Private Dining</div>
+          <div class="event-pill">Wedding Reception</div>
+          <div class="event-pill">Birthday Party</div>
+          <div class="event-pill">Corporate Meeting</div>
+          <div class="event-pill">Family Gathering</div>
+          <div class="event-pill">After Wedding</div>
+          <div class="event-pill">Private Dining</div>
+        </div>
+      </div>
+
+      <section class="section spaces" id="spaces">
+        <div class="container">
+          <div class="section-header reveal">
+            <div>
+              <div class="section-number">03</div>
+              <h2>Ruang Yang Nyaman</h2>
+            </div>
+            <p>
+              Ruang interior yang hangat, area luar yang terbuka, dan room privat yang
+              cocok untuk momen spesial dan gathering bersama keluarga.
+            </p>
+          </div>
+
+          <div class="spaces-grid reveal">
+            <article class="space-card">
+              <img
+                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1000&q=80&auto=format"
+                alt="Indoor dining space at GOKIL"
+              />
+              <div class="space-overlay">
+                <span class="space-tag">Indoor</span>
+                <h3>Indoor</h3>
+              </div>
+            </article>
+
+            <div class="right-stack">
+              <article class="space-card small-card">
+                <img
+                  src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=800&q=80&auto=format"
+                  alt="Outdoor dining area"
+                />
+                <div class="space-overlay">
+                  <span class="space-tag">Outdoor</span>
+                  <h3>Outdoor</h3>
+                </div>
+              </article>
+
+              <article class="space-card small-card">
+                <img
+                  src="https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?w=800&q=80&auto=format"
+                  alt="Private dining room"
+                />
+                <div class="space-overlay">
+                  <span class="space-tag">Private Room</span>
+                  <h3>Private</h3>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="facility-strip" aria-label="Restaurant facilities">
+        <div class="container facility-row reveal">
+          <div class="facility-item"><span class="icon">🎵</span> Sound System</div>
+          <div class="facility-item"><span class="icon">🎤</span> Karaoke</div>
+          <div class="facility-item"><span class="icon">📶</span> Free WiFi</div>
+          <div class="facility-item"><span class="icon">🚗</span> Parkir Luas</div>
+          <div class="facility-item"><span class="icon">🛵</span> Grab Food</div>
+          <div class="facility-item"><span class="icon">🎉</span> Event Space</div>
+        </div>
+      </section>
+
+      <section class="section location" id="location">
+        <div class="container">
+          <div class="section-header reveal">
+            <div>
+              <div class="section-number">04</div>
+              <h2>Temukan GOKIL</h2>
+            </div>
+            <p>
+              Akses mudah untuk keluarga, teman, dan rombongan saat ingin berkumpul di
+              ruang yang hangat dan penuh kenangan.
+            </p>
+          </div>
+
+          <div class="location-grid reveal">
+            <div class="location-panel">
+              <div class="meta-kicker" style="margin-bottom: 10px; color: var(--copper);">Lokasi &amp; Kontak</div>
+              <p>
+                PT Muria Jaya Boga<br />
+                Jl. AKBP Agil Kusumadya No.68, Jatikulon Krajan, Jati Kulon, Kec. Jati,
+                Kudus, Jawa Tengah 59347.
+              </p>
+
+              <div class="contact-list">
+                <div class="contact-item">
+                  <strong>WhatsApp</strong>
+                  <a href="https://wa.me/6282319482812" target="_blank" rel="noopener noreferrer">0823 1948 2812</a>
+                </div>
+                <div class="contact-item">
+                  <strong>Phone</strong>
+                  <a href="tel:+6288221738878">0882 2173 8878</a>
+                </div>
+                <div class="contact-item">
+                  <strong>Instagram</strong>
+                  <a href="https://www.instagram.com/gokilrestaurant/" target="_blank" rel="noopener noreferrer">@gokilrestaurant</a>
+                </div>
+                <div class="contact-item">
+                  <strong>Linktree</strong>
+                  <a href="https://linktr.ee/Gokilrestaurant" target="_blank" rel="noopener noreferrer">linktr.ee/Gokilrestaurant</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="map-card" aria-label="Map location" style="position:relative;min-height:350px;border-radius:4px;overflow:hidden;">
+              <iframe
+                src="https://maps.google.com/maps?q=Jl.%20AKBP%20Agil%20Kusumadya%20No.68%20Kudus&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style="position:absolute;inset:0;border:0;filter:grayscale(0.3) contrast(1.05);min-height:350px;"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Lokasi GOKIL Restaurant di Google Maps">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="brand" aria-label="GOKIL brand footer">
+          <span class="brand-mark" style="color: var(--paper);">GOKIL</span>
+          <span class="brand-dot"></span>
+        </div>
+
+        <div class="footer-links">
+          <a href="#about">Tentang</a>
+          <a href="#menu">Menu</a>
+          <a href="#spaces">Ruang</a>
+          <a href="#location">Lokasi</a>
+        </div>
+
+        <div style="width:100%;text-align:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(168,159,150,0.1);">
+          <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.5rem;">
+            Jl. AKBP Agil Kusumadya No.68, Jatikulon, Kudus ·
+            <a href="https://wa.me/6282319482812" style="color:var(--copper);text-decoration:none;">0823-1948-2812</a> ·
+            <a href="https://www.instagram.com/gokilrestaurant/" style="color:var(--copper);text-decoration:none;">@gokilrestaurant</a>
+          </p>
+          <p style="font-size:0.68rem;color:var(--muted);opacity:0.5;margin-top:0.5rem;">
+            ⚠️ Situs konsep (demo) — bukan website resmi GOKIL Restaurant. Dibuat sebagai referensi desain. Seluruh konten © PT Muria Jaya Boga.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating WhatsApp button -->
+    <a href="https://wa.me/6282319482812?text=Halo%20GOKIL%20Restaurant%2C%20saya%20ingin%20melakukan%20reservasi"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Chat WhatsApp GOKIL Restaurant"
+       style="position:fixed;bottom:24px;right:24px;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:transform 0.3s;"
+       onmouseover="this.style.transform='scale(1.1)'"
+       onmouseout="this.style.transform='scale(1)'">💬</a>
+
+    <script>
+      const header = document.querySelector('.site-header');
+      const menuToggle = document.querySelector('.menu-toggle');
+      const mobileMenu = document.querySelector('.mobile-menu');
+      const body = document.body;
+
+      const handleScroll = () => {
+        const scrolled = window.scrollY > 18;
+        header.classList.toggle('scrolled', scrolled);
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+
+      const revealItems = document.querySelectorAll('.reveal');
+      const revealAll = () => {
+        revealItems.forEach((item) => {
+          const top = item.getBoundingClientRect().top;
+          if (top < window.innerHeight + 40) {
+            item.classList.add('visible');
+          }
+        });
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.05, rootMargin: '0px 0px -24px 0px' }
+      );
+
+      revealItems.forEach((item) => observer.observe(item));
+      window.addEventListener('load', revealAll);
+      window.addEventListener('resize', revealAll);
+      setTimeout(revealAll, 1200);
+
+      menuToggle.addEventListener('click', () => {
+        const open = menuToggle.classList.toggle('open');
+        mobileMenu.classList.toggle('open', open);
+        body.classList.toggle('no-scroll', open);
+      });
+
+      mobileMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          menuToggle.classList.remove('open');
+          mobileMenu.classList.remove('open');
+          body.classList.remove('no-scroll');
+        });
+      });
+    </script>
+  </body>
+</html>
