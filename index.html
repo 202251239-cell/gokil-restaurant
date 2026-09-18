@@ -28,6 +28,7 @@
         --line-dark: rgba(28, 25, 23, 0.14);
         --drift: rgba(184, 115, 51, 0.18);
         --shadow: rgba(18, 15, 13, 0.18);
+        --muted: #8a8078;
         --maxw: 1320px;
       }
 
@@ -1031,6 +1032,137 @@
           font-size: 2.4rem;
         }
       }
+
+      /* ========== Animation Enhancements ========== */
+
+      /* 1. Hero Stagger Text — word base style */
+      .hero-word {
+        display: inline-block;
+      }
+
+      /* 2. Stamp Rotation — continuous wobble + float */
+      @keyframes stamp-wobble {
+        0%, 100% { transform: rotate(-12deg) translateY(0); }
+        50% { transform: rotate(12deg) translateY(-6px); }
+      }
+      .stamp {
+        animation: stamp-wobble 12s ease-in-out infinite;
+      }
+
+      /* 3. Menu Card 3D Tilt */
+      .menu-grid {
+        perspective: 800px;
+      }
+      .menu-card {
+        transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+
+      /* 4. Counter — tabular numbers for smooth count */
+      .counter {
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* 5. Facility Items Stagger */
+      .facility-item {
+        transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.25s ease, background 0.25s ease;
+      }
+      .facility-stagger {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      .facility-stagger.facility-visible {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+      .facility-stagger:nth-child(1) { transition-delay: 0s; }
+      .facility-stagger:nth-child(2) { transition-delay: 0.1s; }
+      .facility-stagger:nth-child(3) { transition-delay: 0.2s; }
+      .facility-stagger:nth-child(4) { transition-delay: 0.3s; }
+      .facility-stagger:nth-child(5) { transition-delay: 0.4s; }
+      .facility-stagger:nth-child(6) { transition-delay: 0.5s; }
+
+      /* 6. WhatsApp Button Pulse */
+      @keyframes wa-pulse {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+        }
+        50% {
+          transform: scale(1.08);
+          box-shadow: 0 4px 30px rgba(37,211,102,0.6);
+        }
+      }
+      .wa-float {
+        animation: wa-pulse 2.5s ease-in-out infinite !important;
+      }
+      .wa-float:hover {
+        animation-play-state: paused !important;
+        transform: scale(1.12) !important;
+      }
+
+      /* 7. Nav Scroll Progress Bar */
+      .nav-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 0%;
+        background: var(--copper);
+        transition: width 0.08s linear;
+      }
+
+      /* 9. Section Number Ghost Float — will-change */
+      .section-number {
+        will-change: transform;
+      }
+
+      /* 10. Smooth Hover Effects */
+      .feature {
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      }
+      .feature:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(184,115,51,0.1);
+      }
+      .menu-card:hover {
+        border-color: rgba(184,115,51,0.45);
+        box-shadow: 0 0 20px rgba(184,115,51,0.12);
+      }
+      .facility-stagger.facility-visible:hover {
+        transform: translateY(-2px) !important;
+        border-color: rgba(245,240,232,0.25);
+        background: rgba(245,240,232,0.05);
+      }
+
+      /* Reduced Motion — disable all animations */
+      @media (prefers-reduced-motion: reduce) {
+        .hero-word,
+        .facility-stagger {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        .stamp {
+          animation: none !important;
+        }
+        .wa-float {
+          animation: none !important;
+        }
+        .nav-progress {
+          transition: none !important;
+        }
+        .feature:hover,
+        .menu-card:hover,
+        .facility-item:hover {
+          transform: none !important;
+        }
+        .section-number,
+        .photo-arch img {
+          transform: none !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1064,6 +1196,8 @@
         </button>
       </div>
 
+      <div class="nav-progress"></div>
+
       <nav class="mobile-menu" aria-label="Mobile navigation">
         <a href="#about">Tentang</a>
         <a href="#menu">Menu</a>
@@ -1084,7 +1218,7 @@
         <div class="container hero-inner">
           <div class="hero-copy reveal">
             <div class="meta-kicker">Family Style Fine Dining — Kudus</div>
-            <h1>Flavours. <em>Space.</em> Moment.</h1>
+            <h1><span class="hero-word">Flavours.</span> <span class="hero-word"><em>Space.</em></span> <span class="hero-word">Moment.</span></h1>
             <p>
               Bukan sekadar tempat makan. Ini adalah ruang di mana keluarga berkumpul,
               cerita tercipta, dan setiap suapan punya makna. Nikmati hidangan dengan
@@ -1160,19 +1294,19 @@
 
               <div class="feature-grid">
                 <div class="feature">
-                  <strong>Tiga Masakan</strong>
+                  <strong><span class="counter" data-target="3">0</span> Masakan</strong>
                   <span>Indonesia • Western • Chinese</span>
                 </div>
                 <div class="feature">
-                  <strong>Signature</strong>
+                  <strong><span class="counter" data-target="1">0</span> Signature</strong>
                   <span>Sego Kikil andalan</span>
                 </div>
                 <div class="feature">
-                  <strong>Acara</strong>
+                  <strong><span class="counter" data-target="6">0</span>+ Acara</strong>
                   <span>Wedding, birthday, gathering</span>
                 </div>
                 <div class="feature">
-                  <strong>Sejak 2021</strong>
+                  <strong><span class="counter" data-target="4">0</span> Tahun</strong>
                   <span>Family style dining sejak awal</span>
                 </div>
               </div>
@@ -1429,9 +1563,8 @@
     <a href="https://wa.me/6282319482812?text=Halo%20GOKIL%20Restaurant%2C%20saya%20ingin%20melakukan%20reservasi"
        target="_blank" rel="noopener noreferrer"
        aria-label="Chat WhatsApp GOKIL Restaurant"
-       style="position:fixed;bottom:24px;right:24px;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:transform 0.3s;"
-       onmouseover="this.style.transform='scale(1.1)'"
-       onmouseout="this.style.transform='scale(1)'">💬</a>
+       class="wa-float"
+       style="position:fixed;bottom:24px;right:24px;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.6rem;">💬</a>
 
     <script>
       const header = document.querySelector('.site-header');
@@ -1486,6 +1619,148 @@
           body.classList.remove('no-scroll');
         });
       });
+
+      /* ========== Animation Enhancements ========== */
+      (function () {
+        var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) return;
+
+        /* 1. Hero Stagger Text Entrance */
+        var heroCopy = document.querySelector('.hero-copy');
+        if (heroCopy) {
+          heroCopy.classList.remove('reveal');
+          heroCopy.style.opacity = '1';
+          heroCopy.style.transform = 'none';
+          var heroChildren = Array.from(heroCopy.children);
+          heroChildren.forEach(function (child, i) {
+            child.style.opacity = '0';
+            child.style.transform = 'translateY(28px) rotateX(8deg)';
+            child.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+            child.style.transitionDelay = (300 + i * 120) + 'ms';
+            requestAnimationFrame(function () {
+              child.style.opacity = '1';
+              child.style.transform = 'translateY(0) rotateX(0)';
+            });
+          });
+        }
+
+        /* 7. Nav Scroll Progress Bar */
+        var navProgress = document.querySelector('.nav-progress');
+        if (navProgress) {
+          window.addEventListener('scroll', function () {
+            var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var pct = scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
+            navProgress.style.width = pct + '%';
+          }, { passive: true });
+        }
+
+        /* 8. Hero Image Parallax */
+        var heroImg = document.querySelector('.photo-arch img');
+        var heroSection = document.querySelector('.hero');
+        var heroTicking = false;
+        if (heroImg && heroSection) {
+          window.addEventListener('scroll', function () {
+            if (!heroTicking) {
+              requestAnimationFrame(function () {
+                var rect = heroSection.getBoundingClientRect();
+                if (rect.bottom > 0 && rect.top < window.innerHeight) {
+                  var offset = -rect.top * 0.25;
+                  heroImg.style.transform = 'translateY(' + offset + 'px)';
+                }
+                heroTicking = false;
+              });
+              heroTicking = true;
+            }
+          }, { passive: true });
+        }
+
+        /* 9. Section Number Ghost Float */
+        var sectionNumbers = document.querySelectorAll('.section-number');
+        var secTicking = false;
+        if (sectionNumbers.length) {
+          window.addEventListener('scroll', function () {
+            if (!secTicking) {
+              requestAnimationFrame(function () {
+                sectionNumbers.forEach(function (num) {
+                  var rect = num.getBoundingClientRect();
+                  if (rect.bottom > -100 && rect.top < window.innerHeight + 100) {
+                    var offset = (rect.top - window.innerHeight * 0.5) * -0.06;
+                    num.style.transform = 'translateY(' + offset + 'px)';
+                  }
+                });
+                secTicking = false;
+              });
+              secTicking = true;
+            }
+          }, { passive: true });
+        }
+
+        /* 3. Menu Card 3D Tilt */
+        document.querySelectorAll('.menu-card').forEach(function (card) {
+          card.addEventListener('mousemove', function (e) {
+            var rect = card.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            var cx = rect.width / 2;
+            var cy = rect.height / 2;
+            var rotateX = ((y - cy) / cy) * -5;
+            var rotateY = ((x - cx) / cx) * 5;
+            card.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+          });
+          card.addEventListener('mouseleave', function () {
+            card.style.transform = 'rotateX(0) rotateY(0)';
+          });
+        });
+
+        /* 4. Counter Animation for Features */
+        var counters = document.querySelectorAll('.counter');
+        if (counters.length) {
+          var easeOutCubic = function (t) { return 1 - Math.pow(1 - t, 3); };
+          var counterObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                var el = entry.target;
+                var target = parseInt(el.getAttribute('data-target'), 10);
+                var duration = 1200;
+                var startTime = performance.now();
+                function tick(now) {
+                  var elapsed = now - startTime;
+                  var progress = Math.min(elapsed / duration, 1);
+                  el.textContent = Math.round(target * easeOutCubic(progress));
+                  if (progress < 1) {
+                    requestAnimationFrame(tick);
+                  } else {
+                    el.textContent = target;
+                  }
+                }
+                requestAnimationFrame(tick);
+                counterObserver.unobserve(el);
+              }
+            });
+          }, { threshold: 0.5 });
+          counters.forEach(function (c) { counterObserver.observe(c); });
+        }
+
+        /* 5. Facility Items Stagger */
+        var facilityRow = document.querySelector('.facility-row');
+        if (facilityRow) {
+          var items = facilityRow.querySelectorAll('.facility-item');
+          items.forEach(function (item) { item.classList.add('facility-stagger'); });
+          var facilityObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                items.forEach(function (item, i) {
+                  setTimeout(function () {
+                    item.classList.add('facility-visible');
+                  }, i * 100);
+                });
+                facilityObserver.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.3 });
+          facilityObserver.observe(facilityRow);
+        }
+      })();
     </script>
   </body>
 </html>
